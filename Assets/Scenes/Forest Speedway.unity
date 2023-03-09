@@ -479,8 +479,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  speed: 0
-  turnSpeed: 0
+  speed: 11.8
+  turnSpeed: 11.2
   stamina: 0
 --- !u!1 &559507860
 GameObject:
