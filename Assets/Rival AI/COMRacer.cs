@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class COMRacer : MonoBehaviour
 {
+    public GameObject[] waypoints;
+    
     public float speed;
     public float turnSpeed;
 
     public float stamina;
-
-    Animator mood;
     
     // Start is called before the first frame update
     void Start()
     {
-        mood = GetComponent<Animator>();
         stamina = 30.0f;
     }
 
@@ -23,7 +22,23 @@ public class COMRacer : MonoBehaviour
     {
         //TODO - Use NavMeshAgent and waypoints to make ai race
         //TODO - Should code for racing around track be in state scripts?
-        stamina -= Time.deltaTime;
-        mood.SetFloat("Energy", stamina);
+        stamina--; //this variable will constantly be lowering
+        //TODO - Have stamina visible on the GUI
+        if (stamina < 10)
+        {
+            speed--;
+            //TODO - figure out how to set speed of increase
+            stamina += Time.deltaTime;
+            stamina++;
+            stamina++;
+        }
+        if (stamina > 50)
+        {
+            speed = 50;
+        }
+        if (stamina < 35)
+        {
+            speed = 10;
+        }
     }
 }

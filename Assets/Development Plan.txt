@@ -1,0 +1,5 @@
+Step 1: Make rival's stamina system first, check that it is working and changing states before moving on.
+Step 2: Create a 'throw carrot' mechanic for the player that will immediately sent rabbit into sleep state, allowing the player to catch up
+Step 3: Place waypoints on track for rabbit to follow
+Step 4: Place an invisble box or something and expand it's collision to function as finish line
+Step 5: Final polish
