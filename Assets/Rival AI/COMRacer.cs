@@ -1,10 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class COMRacer : MonoBehaviour
 {
     public GameObject[] waypoints;
-    private int currentWaypoint = 0;
+    int currentWaypoint = 0;
     private float accuracy = 1.0f;
 
     //public NavMeshAgent agent;
@@ -13,6 +14,11 @@ public class COMRacer : MonoBehaviour
     public float turnSpeed;
 
     public float stamina;
+    public bool sleep;
+    public bool rage;
+
+    public TMP_Text staminaText;
+    public TMP_Text moodText;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +26,8 @@ public class COMRacer : MonoBehaviour
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
         //agent = GetComponent<NavMeshAgent>();
         stamina = 40.0f;
+        sleep = false;
+        rage = false;
     }
 
     // Update is called once per frame
@@ -45,21 +53,33 @@ public class COMRacer : MonoBehaviour
 
         stamina -= Time.deltaTime; //this variable will constantly be lowering
         //TODO - Have stamina visible on the GUI
-        if (stamina < 10)
+        if (!sleep && rage && stamina < 35)
         {
             //speed--;
+            rage = false;
+            moodText.text = "Mood: Normal";
+        }
+        if (stamina < 10)
+        {
+            /*speed = 0;
             //TODO - figure out how to set speed of increase
-            /*stamina += Time.deltaTime;
+            stamina += Time.deltaTime;
             stamina++;
             stamina++;*/
+            moodText.text = "Mood: Zzz...";
+            sleep = true;
         }
-        if (stamina > 50)
+        if (sleep && stamina < 50)
         {
             //speed = 50;
+            moodText.text = "Mood: #@*!!!!!";
         }
-        if (stamina < 35)
-        {
-            //speed = 10;
-        }
+
+        DisplayStamina();
+    }
+
+    void DisplayStamina()
+    {
+        staminaText.text = "Stamina: " + stamina;
     }
 }
