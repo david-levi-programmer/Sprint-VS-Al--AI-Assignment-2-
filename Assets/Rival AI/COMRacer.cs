@@ -7,8 +7,6 @@ public class COMRacer : MonoBehaviour
     public GameObject[] waypoints;
     int currentWaypoint = 0;
     private float accuracy = 1.0f;
-
-    //public NavMeshAgent agent;
     
     public float speed;
     public float turnSpeed;
@@ -24,7 +22,6 @@ public class COMRacer : MonoBehaviour
     void Start()
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
-        //agent = GetComponent<NavMeshAgent>();
         stamina = 40.0f;
         sleep = false;
         rage = false;
@@ -49,7 +46,7 @@ public class COMRacer : MonoBehaviour
                 currentWaypoint = 0;
             }
         }
-        this.transform.Rotate(0, 0, speed * Time.deltaTime);
+        this.transform.Translate(0, 0, speed * Time.deltaTime);
 
         stamina -= Time.deltaTime; //this variable will constantly be lowering
         //TODO - Have stamina visible on the GUI
