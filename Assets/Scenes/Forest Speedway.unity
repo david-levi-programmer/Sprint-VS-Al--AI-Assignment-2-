@@ -697,7 +697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508404160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.19, y: 1.11, z: 2.6751497}
+  m_LocalPosition: {x: -5.19, y: 0.5, z: 2.6751497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -718,8 +718,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   speed: 11.8
-  turnSpeed: 11.2
-  stamina: 0
+  turnSpeed: 10
+  stamina: 25
+  sleep: 0
+  rage: 0
   staminaText: {fileID: 1768969155}
   moodText: {fileID: 1073488964}
 --- !u!1 &559507860
@@ -959,7 +961,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711178901}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5626411, y: 1.0473337, z: -0.4299016}
+  m_LocalPosition: {x: -1.5626411, y: 0.5, z: -0.4299016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -980,7 +982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12317e3ca7da0554296662ed66f09fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
   turnspeed: 50
 --- !u!1 &761964072
 GameObject:
@@ -1398,7 +1400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.038, y: 2.04, z: -3.19}
+  m_LocalPosition: {x: 0, y: 2.61, z: -8.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

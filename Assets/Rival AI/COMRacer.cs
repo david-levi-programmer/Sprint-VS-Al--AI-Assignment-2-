@@ -12,6 +12,7 @@ public class COMRacer : MonoBehaviour
     public float turnSpeed;
 
     public float stamina;
+    private bool running;
     public bool sleep;
     public bool rage;
 
@@ -22,9 +23,9 @@ public class COMRacer : MonoBehaviour
     void Start()
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
-        stamina = 40.0f;
         sleep = false;
-        rage = false;
+        rage = true;
+        moodText.text = "Mood: Normal";
     }
 
     // Update is called once per frame
@@ -48,27 +49,36 @@ public class COMRacer : MonoBehaviour
         }
         this.transform.Translate(0, 0, speed * Time.deltaTime);
 
-        stamina -= Time.deltaTime; //this variable will constantly be lowering
-        //TODO - Have stamina visible on the GUI
-        if (!sleep && rage && stamina < 35)
+        if (running)
         {
-            //speed--;
+            stamina -= Time.deltaTime; //this variable will constantly be lowering
+        }
+        if (sleep)
+        {
+            //TODO - figure out how to set speed of increase
+            stamina += Time.deltaTime;
+        }
+
+        if (!sleep && rage && stamina < 25)
+        {
+            speed = 17.5f;
             rage = false;
+            running = true;
             moodText.text = "Mood: Normal";
         }
         if (stamina < 10)
         {
-            /*speed = 0;
-            //TODO - figure out how to set speed of increase
-            stamina += Time.deltaTime;
-            stamina++;
-            stamina++;*/
+            speed = 0;
             moodText.text = "Mood: Zzz...";
+            running = false;
             sleep = true;
         }
-        if (sleep && stamina < 50)
+        if (sleep && stamina > 32.5)
         {
-            //speed = 50;
+            speed = 25;
+            sleep = false;
+            rage = true;
+            running = true;
             moodText.text = "Mood: #@*!!!!!";
         }
 
