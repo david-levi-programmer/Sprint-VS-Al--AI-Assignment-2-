@@ -19,7 +19,6 @@ public class COMRacer : MonoBehaviour
     public TMP_Text staminaText;
     public TMP_Text moodText;
     
-    // Start is called before the first frame update
     void Start()
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
@@ -28,7 +27,6 @@ public class COMRacer : MonoBehaviour
         moodText.text = "Mood: Normal";
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (waypoints.Length == 0) return;
@@ -51,31 +49,30 @@ public class COMRacer : MonoBehaviour
 
         if (running)
         {
-            stamina -= Time.deltaTime; //this variable will constantly be lowering
+            stamina -= Time.deltaTime; //Rival's energy depletes over time...
         }
-        if (sleep)
+        if (sleep) //...except he's asleep, which restores his energy
         {
-            //TODO - figure out how to set speed of increase
             stamina += Time.deltaTime;
         }
 
-        if (!sleep && rage && stamina < 25)
+        if (!sleep && rage && stamina <= 25) //Rival's default state
         {
-            speed = 17.5f;
+            speed = 17;
             rage = false;
             running = true;
             moodText.text = "Mood: Normal";
         }
-        if (stamina < 10)
+        if (stamina < 10) //Rival falls asleep on the spot
         {
             speed = 0;
             moodText.text = "Mood: Zzz...";
             running = false;
             sleep = true;
         }
-        if (sleep && stamina > 32.5)
+        if (sleep && stamina > 35) //Rival wakes up in a rage and blasts off
         {
-            speed = 25;
+            speed = 26;
             sleep = false;
             rage = true;
             running = true;
@@ -87,6 +84,6 @@ public class COMRacer : MonoBehaviour
 
     void DisplayStamina()
     {
-        staminaText.text = "Stamina: " + stamina;
+        staminaText.text = "Al's Stamina: " + stamina;
     }
 }
