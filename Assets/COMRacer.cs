@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class COMRacer : MonoBehaviour
 {
@@ -51,14 +50,14 @@ public class COMRacer : MonoBehaviour
         {
             stamina -= Time.deltaTime; //Rival's energy depletes over time...
         }
-        if (sleep) //...except he's asleep, which restores his energy
+        if (sleep) //...except when he's asleep, which restores his energy
         {
             stamina += Time.deltaTime;
         }
-
+        //TODO - Keep tuning how fast Al moves and changes states
         if (!sleep && rage && stamina <= 25) //Rival's default state
         {
-            speed = 17;
+            speed = 19;
             rage = false;
             running = true;
             moodText.text = "Mood: Normal";
@@ -70,9 +69,9 @@ public class COMRacer : MonoBehaviour
             running = false;
             sleep = true;
         }
-        if (sleep && stamina > 35) //Rival wakes up in a rage and blasts off
+        if (sleep && stamina > 33.5) //Rival wakes up in a rage and blasts off
         {
-            speed = 26;
+            speed = 45;
             sleep = false;
             rage = true;
             running = true;
