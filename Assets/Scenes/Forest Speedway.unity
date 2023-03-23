@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -603,9 +603,10 @@ GameObject:
   - component: {fileID: 508404162}
   - component: {fileID: 508404161}
   - component: {fileID: 508404166}
+  - component: {fileID: 508404167}
   m_Layer: 0
   m_Name: AI Rival
-  m_TagString: Untagged
+  m_TagString: Rival
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -697,7 +698,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508404160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.19, y: 0.5, z: 2.6751497}
+  m_LocalPosition: {x: -5.19, y: 0.5, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -717,13 +718,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
+  hasDetectedCarrot: 0
   speed: 11.8
   turnSpeed: 10
+  detectionArea: 0
   stamina: 25
   sleep: 0
   rage: 0
   staminaText: {fileID: 1768969155}
   moodText: {fileID: 1073488964}
+--- !u!135 &508404167
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508404160}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 68.6
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &559507860
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,7 +1000,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   turnspeed: 50
-  carrot: {fileID: 0}
+  carrot: {fileID: 8610627132670778100, guid: 9e04b7a13fd9f024b848dc48c7839d04, type: 3}
 --- !u!1 &761964072
 GameObject:
   m_ObjectHideFlags: 0

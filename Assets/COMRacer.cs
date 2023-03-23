@@ -1,14 +1,21 @@
 using TMPro;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class COMRacer : MonoBehaviour
 {
     public GameObject[] waypoints;
+    GameObject carrot;
+    SphereCollider collision;
+
+    public bool hasDetectedCarrot; //TODO - Make this non-public when testing is over
+
     int currentWaypoint = 0;
     private float accuracy = 1.0f;
     
     public float speed;
     public float turnSpeed;
+    public float detectionArea; //TODO - This too
 
     public float stamina;
     private bool running;
@@ -21,6 +28,9 @@ public class COMRacer : MonoBehaviour
     void Start()
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        collision = GetComponent<SphereCollider>();
+        detectionArea = collision.radius;
+        hasDetectedCarrot = false;
         sleep = false;
         rage = true;
         moodText.text = "Mood: Normal";
@@ -30,20 +40,37 @@ public class COMRacer : MonoBehaviour
     {
         if (waypoints.Length == 0) return;
 
-        Vector3 target = new Vector3(waypoints[currentWaypoint].transform.position.x, this.transform.position.y,
-                                    waypoints[currentWaypoint].transform.position.z);
-        Vector3 direction = target - this.transform.position;
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction),
-                                    Time.deltaTime * turnSpeed);
-        if (direction.magnitude < accuracy)
+        Vector3 target;
+
+        if (!hasDetectedCarrot)
         {
-            currentWaypoint++;
-            if (currentWaypoint >= waypoints.Length)
+            target = new Vector3(waypoints[currentWaypoint].transform.position.x, this.transform.position.y,
+                                    waypoints[currentWaypoint].transform.position.z);
+            Vector3 direction = target - this.transform.position;
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction),
+                                        Time.deltaTime * turnSpeed);
+            if (direction.magnitude < accuracy)
             {
-                //TODO - Code for some sort of 'Player loses' event here
-                currentWaypoint = 0;
+                currentWaypoint++;
+                if (currentWaypoint >= waypoints.Length)
+                {
+                    //TODO - Code for some sort of 'Player loses' event here
+                    currentWaypoint = 0;
+                }
             }
         }
+        else
+        {
+            target = new Vector3(carrot.transform.position.x, carrot.transform.position.y, carrot.transform.position.z);
+            Vector3 direction = target - this.transform.position;
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction),
+                                        Time.deltaTime * turnSpeed);
+            if (direction.magnitude < accuracy)
+            {
+                hasDetectedCarrot = false;
+            }
+        }
+
         this.transform.Translate(0, 0, speed * Time.deltaTime);
 
         if (running)
@@ -88,6 +115,10 @@ public class COMRacer : MonoBehaviour
 
     public void GetCarrot(Vector3 position)
     {
-
+        if (Vector3.Distance(position, this.transform.position) < detectionArea)
+        {
+            carrot = GameObject.FindGameObjectWithTag("Carrot");
+            hasDetectedCarrot = true;
+        }
     }
 }

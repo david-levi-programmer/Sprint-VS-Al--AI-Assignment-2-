@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -15,16 +16,15 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         float horiz = Input.GetAxis("Horizontal"); // < > arrows or A and D
-        float vert = Input.GetAxis("Vertical");     // \/ /\ arrows or W and S
+        float vert = Input.GetAxis("Vertical"); // v ^ arrows or W and S
         float rotation = horiz * turnspeed * Time.deltaTime;
         float translation = vert * speed * Time.deltaTime;
         transform.Rotate(0, rotation, 0);
         transform.Translate(0, 0, translation);
-        //TODO - Should there be a jump button?
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(carrot, this.transform.position, carrot.transform.rotation);
-
+            Instantiate(carrot, transform.position, carrot.transform.rotation);
+            rival.GetComponent<COMRacer>().GetCarrot(carrot.transform.position);
         }
     }
 }

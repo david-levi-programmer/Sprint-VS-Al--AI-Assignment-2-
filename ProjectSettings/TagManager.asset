@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Waypoint
+  - Carrot
+  - Rival
   layers:
   - Default
   - TransparentFX
