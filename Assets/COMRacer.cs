@@ -85,4 +85,9 @@ public class COMRacer : MonoBehaviour
     {
         staminaText.text = "Al's Stamina: " + stamina;
     }
+
+    public void GetCarrot(Vector3 position)
+    {
+
+    }
 }

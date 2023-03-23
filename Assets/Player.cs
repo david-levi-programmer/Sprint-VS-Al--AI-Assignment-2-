@@ -5,6 +5,12 @@ public class Player : MonoBehaviour
     public float speed = 10.0f;
     public float turnspeed = 50.0f;
     public GameObject carrot;
+    GameObject rival;
+
+    private void Start()
+    {
+        rival = GameObject.FindGameObjectWithTag("Rival");
+    }
 
     void FixedUpdate()
     {
@@ -14,15 +20,11 @@ public class Player : MonoBehaviour
         float translation = vert * speed * Time.deltaTime;
         transform.Rotate(0, rotation, 0);
         transform.Translate(0, 0, translation);
-        //TODO - Consider adding jump function
+        //TODO - Should there be a jump button?
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            DropCarrot();
-        }
-    }
+            Instantiate(carrot, this.transform.position, carrot.transform.rotation);
 
-    void DropCarrot()
-    {
-        //TODO - Look up how to drop objects where player stands
+        }
     }
 }
