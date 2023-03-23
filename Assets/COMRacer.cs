@@ -1,6 +1,6 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class COMRacer : MonoBehaviour
 {
@@ -8,18 +8,22 @@ public class COMRacer : MonoBehaviour
     GameObject carrot;
     SphereCollider collision;
 
-    public bool hasDetectedCarrot; //TODO - Make this non-public when testing is over
+    public bool hasDetectedCarrot;
+    public float timer;
+    public float timeLimit;
 
     int currentWaypoint = 0;
     private float accuracy = 1.0f;
     
     public float speed;
+    public float defaultSpeed;
     public float turnSpeed;
-    public float detectionArea; //TODO - This too
+    private float detectionArea;
 
     public float stamina;
     private bool running;
     public bool sleep;
+    public bool eating;
     public bool rage;
 
     public TMP_Text staminaText;
@@ -65,9 +69,10 @@ public class COMRacer : MonoBehaviour
             Vector3 direction = target - this.transform.position;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction),
                                         Time.deltaTime * turnSpeed);
-            if (direction.magnitude < accuracy)
+            if (direction.magnitude < accuracy && !sleep)
             {
                 hasDetectedCarrot = false;
+                eating = true;
             }
         }
 
@@ -80,11 +85,32 @@ public class COMRacer : MonoBehaviour
         if (sleep) //...except when he's asleep, which restores his energy
         {
             stamina += Time.deltaTime;
+            running = false;
         }
+        if (eating)
+        {
+            stamina += Time.deltaTime;
+            timer += Time.deltaTime;
+            running = false;
+            if (timer < timeLimit)
+            {
+                speed = 0;
+                moodText.text = "Mood: Eating";
+            }
+            if (timer > timeLimit)
+            {
+                eating = false;
+                running = true;
+                timer = 0;
+                speed = defaultSpeed;
+                carrot.gameObject.SetActive(false);
+            }
+        }
+
         //TODO - Keep tuning how fast Al moves and changes states
         if (!sleep && rage && stamina <= 25) //Rival's default state
         {
-            speed = 19;
+            speed = defaultSpeed;
             rage = false;
             running = true;
             moodText.text = "Mood: Normal";
@@ -93,7 +119,6 @@ public class COMRacer : MonoBehaviour
         {
             speed = 0;
             moodText.text = "Mood: Zzz...";
-            running = false;
             sleep = true;
         }
         if (sleep && stamina > 33.5) //Rival wakes up in a rage and blasts off
