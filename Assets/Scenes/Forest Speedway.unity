@@ -719,11 +719,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   hasDetectedCarrot: 0
+  timer: 0
+  timeLimit: 8
   speed: 11.8
+  defaultSpeed: 19
   turnSpeed: 10
-  detectionArea: 0
   stamina: 25
   sleep: 0
+  eating: 0
   rage: 0
   staminaText: {fileID: 1768969155}
   moodText: {fileID: 1073488964}
@@ -977,7 +980,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711178901}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5626411, y: 0.5, z: -0.4299016}
+  m_LocalPosition: {x: -2.1, y: 0.5, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
