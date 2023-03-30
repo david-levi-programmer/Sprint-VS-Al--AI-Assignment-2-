@@ -6,6 +6,8 @@ public class Timer : MonoBehaviour
     public TMP_Text timerText;
     public float currentTime;
     public bool timerOn = false;
+    public int lapLimit;
+    //TODO - Create instance so that player and rival can get track's lap limit
 
     void Start()
     {

@@ -1,5 +1,4 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class COMRacer : MonoBehaviour
@@ -14,7 +13,8 @@ public class COMRacer : MonoBehaviour
 
     int currentWaypoint = 0;
     private float accuracy = 1.0f;
-    
+    public int lap = 1;
+
     public float speed;
     public float defaultSpeed;
     public float turnSpeed;
@@ -60,6 +60,7 @@ public class COMRacer : MonoBehaviour
                 {
                     //TODO - Code for some sort of 'Player loses' event here
                     currentWaypoint = 0;
+                    lap += 1;
                 }
             }
         }
@@ -103,6 +104,7 @@ public class COMRacer : MonoBehaviour
                 running = true;
                 timer = 0;
                 speed = defaultSpeed;
+                moodText.text = "Mood: Normal";
                 carrot.gameObject.SetActive(false);
             }
         }
