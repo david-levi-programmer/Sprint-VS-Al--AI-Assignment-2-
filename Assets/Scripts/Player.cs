@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
     public float speed = 10.0f;
     public float turnspeed = 50.0f;
 
-    public int lap = 1;
+    public int lap;
 
     public GameObject carrot;
     GameObject rival;

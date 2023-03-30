@@ -13,7 +13,7 @@ public class COMRacer : MonoBehaviour
 
     int currentWaypoint = 0;
     private float accuracy = 1.0f;
-    public int lap = 1;
+    public int lap;
 
     public float speed;
     public float defaultSpeed;
@@ -32,6 +32,7 @@ public class COMRacer : MonoBehaviour
     void Start()
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        //TODO - Create a NavMesh agent when track is done so that rival doesn't fly off into sky
         collision = GetComponent<SphereCollider>();
         detectionArea = collision.radius;
         hasDetectedCarrot = false;
@@ -60,7 +61,6 @@ public class COMRacer : MonoBehaviour
                 {
                     //TODO - Code for some sort of 'Player loses' event here
                     currentWaypoint = 0;
-                    lap += 1;
                 }
             }
         }
@@ -104,8 +104,12 @@ public class COMRacer : MonoBehaviour
                 running = true;
                 timer = 0;
                 speed = defaultSpeed;
-                moodText.text = "Mood: Normal";
                 carrot.gameObject.SetActive(false);
+                moodText.text = "Mood: Normal";
+                if (rage)
+                {
+                    moodText.text = "Mood: #@*!!!!!";
+                }
             }
         }
 
@@ -148,4 +152,12 @@ public class COMRacer : MonoBehaviour
             hasDetectedCarrot = true;
         }
     }
+    //TODO - Look at DialogueTrigger script once home
+    /*private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.CompareTag("Finish"))
+        {
+            lap += 1;
+        }
+    }*/
 }
