@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3932835650828492728}
   - component: {fileID: 3932835650828492735}
   - component: {fileID: 3932835650828492734}
+  - component: {fileID: 4511547332996017986}
   m_Layer: 0
   m_Name: AI Rival
   m_TagString: Rival
@@ -129,19 +130,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
+  agent: {fileID: 0}
   hasDetectedCarrot: 0
   timer: 0
   timeLimit: 8
-  lap: 1
-  speed: 11.8
+  lap: 0
   defaultSpeed: 19
+  rageSpeed: 45
   turnSpeed: 10
-  stamina: 25
-  sleep: 0
-  eating: 0
-  rage: 0
+  defaultThreshold: 25
+  sleepThreshold: 10
+  wakeThreshold: 33.5
   staminaText: {fileID: 0}
   moodText: {fileID: 0}
+  loseText: {fileID: 0}
 --- !u!135 &3932835650828492734
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -155,3 +157,25 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 68.6
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &4511547332996017986
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3932835650828492729}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

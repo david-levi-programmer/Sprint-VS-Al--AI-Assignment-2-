@@ -1,11 +1,14 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class COMRacer : MonoBehaviour
 {
     public GameObject[] waypoints;
+    public NavMeshAgent agent;
     GameObject carrot;
     SphereCollider collision;
+    BoxCollider lapDetect;
 
     public bool hasDetectedCarrot;
     public float timer;
@@ -15,30 +18,40 @@ public class COMRacer : MonoBehaviour
     private float accuracy = 1.0f;
     public int lap;
 
-    public float speed;
+    private float speed;
     public float defaultSpeed;
+    public float rageSpeed;
     public float turnSpeed;
     private float detectionArea;
 
-    public float stamina;
+    private float stamina;
+    public float defaultThreshold;
+    public float sleepThreshold;
+    public float wakeThreshold;
+
     private bool running;
-    public bool sleep;
-    public bool eating;
-    public bool rage;
+    private bool sleep;
+    private bool eating;
+    private bool rage;
 
     public TMP_Text staminaText;
     public TMP_Text moodText;
+    public TMP_Text loseText;
     
     void Start()
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
-        //TODO - Create a NavMesh agent when track is done so that rival doesn't fly off into sky
+        agent = GetComponent<NavMeshAgent>();
         collision = GetComponent<SphereCollider>();
+        lapDetect = GetComponent<BoxCollider>();
         detectionArea = collision.radius;
+        stamina = defaultThreshold;
+        agent.speed = speed;
         hasDetectedCarrot = false;
         sleep = false;
         rage = true;
         moodText.text = "Mood: Normal";
+        loseText.gameObject.SetActive(false);
     }
 
     void Update()
@@ -59,10 +72,11 @@ public class COMRacer : MonoBehaviour
                 currentWaypoint++;
                 if (currentWaypoint >= waypoints.Length)
                 {
-                    //TODO - Code for some sort of 'Player loses' event here
                     currentWaypoint = 0;
                 }
             }
+
+            LapTrigger(lapDetect);
         }
         else
         {
@@ -113,23 +127,22 @@ public class COMRacer : MonoBehaviour
             }
         }
 
-        //TODO - Keep tuning how fast Al moves and changes states
-        if (!sleep && rage && stamina <= 25) //Rival's default state
+        if (!sleep && rage && stamina <= defaultThreshold) //Rival's default state
         {
             speed = defaultSpeed;
             rage = false;
             running = true;
             moodText.text = "Mood: Normal";
         }
-        if (stamina < 10) //Rival falls asleep on the spot
+        if (stamina < sleepThreshold) //Rival falls asleep on the spot
         {
             speed = 0;
             moodText.text = "Mood: Zzz...";
             sleep = true;
         }
-        if (sleep && stamina > 33.5) //Rival wakes up in a rage and blasts off
+        if (sleep && stamina > wakeThreshold) //Rival wakes up in a rage and blasts off
         {
-            speed = 45;
+            speed = rageSpeed;
             sleep = false;
             rage = true;
             running = true;
@@ -152,12 +165,17 @@ public class COMRacer : MonoBehaviour
             hasDetectedCarrot = true;
         }
     }
-    //TODO - Look at DialogueTrigger script once home
-    /*private void OnTriggerEnter(Collider collider)
+
+    private void LapTrigger(Collider collider)
     {
-        if (collider.gameObject.CompareTag("Finish"))
+        if (collider.gameObject.tag == "Finish")
         {
             lap += 1;
         }
-    }*/
+        
+        if (lap > Timer.GetInstance().lapLimit)
+        {
+            loseText.gameObject.SetActive(true);
+        }
+    }
 }

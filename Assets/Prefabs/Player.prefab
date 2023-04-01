@@ -215,9 +215,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   turnspeed: 50
-  lap: 1
+  lap: 0
   carrot: {fileID: 8610627132670778100, guid: 9e04b7a13fd9f024b848dc48c7839d04, type: 3}
   lapText: {fileID: 0}
+  finalLapText: {fileID: 0}
+  victoryText: {fileID: 0}
+  timeLimit: 2.75
 --- !u!1 &6644281410454971803
 GameObject:
   m_ObjectHideFlags: 0

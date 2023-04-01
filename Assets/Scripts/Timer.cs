@@ -7,7 +7,23 @@ public class Timer : MonoBehaviour
     public float currentTime;
     public bool timerOn = false;
     public int lapLimit;
-    //TODO - Create instance so that player and rival can get track's lap limit
+
+    private static Timer instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("There should be only ONE Time/Lap Manager in a scene.");
+        }
+
+        instance = this;
+    }
+
+    public static Timer GetInstance()
+    {
+        return instance;
+    }
 
     void Start()
     {
