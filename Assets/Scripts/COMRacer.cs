@@ -65,16 +65,13 @@ public class COMRacer : MonoBehaviour
             Vector3 direction = target - this.transform.position;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction),
                                         Time.deltaTime * turnSpeed);*/
-            agent.SetDestination(waypoints[currentWaypoint].transform.position);
 
             if (agent.remainingDistance < accuracy)
             {
                 currentWaypoint++;
-                agent.SetDestination(waypoints[currentWaypoint].transform.position);
                 if (currentWaypoint >= waypoints.Length)
                 {
                     currentWaypoint = 0;
-                    agent.SetDestination(waypoints[currentWaypoint].transform.position);
                 }
             }
 
@@ -91,6 +88,7 @@ public class COMRacer : MonoBehaviour
             {
                 hasDetectedCarrot = false;
                 eating = true;
+                agent.SetDestination(waypoints[currentWaypoint].transform.position);
             }
         }
 
