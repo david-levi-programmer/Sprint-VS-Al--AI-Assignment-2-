@@ -15,7 +15,7 @@ public class COMRacer : MonoBehaviour
     public float timeLimit;
 
     int currentWaypoint = 0;
-    public float accuracy = 1.0f;
+    public float accuracy;
     public int lap;
 
     public float defaultSpeed;
@@ -66,7 +66,7 @@ public class COMRacer : MonoBehaviour
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction),
                                         Time.deltaTime * turnSpeed);*/
 
-            if (agent.remainingDistance < accuracy)
+            if (agent.remainingDistance < agent.radius)
             {
                 currentWaypoint++;
                 if (currentWaypoint >= waypoints.Length)

@@ -2062,7 +2062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3932835650828492735, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
       propertyPath: accuracy
-      value: 5.9
+      value: 12.12
       objectReference: {fileID: 0}
     - target: {fileID: 3932835650828492735, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
       propertyPath: loseText
@@ -2080,6 +2080,10 @@ PrefabInstance:
       propertyPath: staminaText
       value: 
       objectReference: {fileID: 1768969155}
+    - target: {fileID: 4511547332996017986, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4511547332996017986, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
       propertyPath: m_AutoBraking
       value: 0

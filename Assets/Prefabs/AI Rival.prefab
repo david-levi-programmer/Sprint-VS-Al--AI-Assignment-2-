@@ -134,7 +134,7 @@ MonoBehaviour:
   hasDetectedCarrot: 0
   timer: 0
   timeLimit: 8
-  accuracy: 1
+  accuracy: 5.9
   lap: 0
   defaultSpeed: 19
   rageSpeed: 45
