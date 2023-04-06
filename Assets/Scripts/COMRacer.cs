@@ -15,13 +15,11 @@ public class COMRacer : MonoBehaviour
     public float timeLimit;
 
     int currentWaypoint = 0;
-    private float accuracy = 1.0f;
+    public float accuracy = 1.0f;
     public int lap;
 
-    private float speed;
     public float defaultSpeed;
     public float rageSpeed;
-    public float turnSpeed;
     private float detectionArea;
 
     private float stamina;
@@ -42,11 +40,11 @@ public class COMRacer : MonoBehaviour
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
         agent = GetComponent<NavMeshAgent>();
+        agent.SetDestination(waypoints[currentWaypoint].transform.position);
         collision = GetComponent<SphereCollider>();
         lapDetect = GetComponent<BoxCollider>();
         detectionArea = collision.radius;
         stamina = defaultThreshold;
-        agent.speed = speed;
         hasDetectedCarrot = false;
         sleep = false;
         rage = true;
@@ -58,21 +56,25 @@ public class COMRacer : MonoBehaviour
     {
         if (waypoints.Length == 0) return;
 
-        Vector3 target;
+        //Vector3 target;
 
         if (!hasDetectedCarrot)
         {
-            target = new Vector3(waypoints[currentWaypoint].transform.position.x, this.transform.position.y,
+            /*target = new Vector3(waypoints[currentWaypoint].transform.position.x, this.transform.position.y,
                                     waypoints[currentWaypoint].transform.position.z);
             Vector3 direction = target - this.transform.position;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction),
-                                        Time.deltaTime * turnSpeed);
-            if (direction.magnitude < accuracy)
+                                        Time.deltaTime * turnSpeed);*/
+            agent.SetDestination(waypoints[currentWaypoint].transform.position);
+
+            if (agent.remainingDistance < accuracy)
             {
                 currentWaypoint++;
+                agent.SetDestination(waypoints[currentWaypoint].transform.position);
                 if (currentWaypoint >= waypoints.Length)
                 {
                     currentWaypoint = 0;
+                    agent.SetDestination(waypoints[currentWaypoint].transform.position);
                 }
             }
 
@@ -80,18 +82,19 @@ public class COMRacer : MonoBehaviour
         }
         else
         {
-            target = new Vector3(carrot.transform.position.x, carrot.transform.position.y, carrot.transform.position.z);
+            /*target = new Vector3(carrot.transform.position.x, carrot.transform.position.y, carrot.transform.position.z);
             Vector3 direction = target - this.transform.position;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction),
-                                        Time.deltaTime * turnSpeed);
-            if (direction.magnitude < accuracy && !sleep)
+                                        Time.deltaTime * turnSpeed);*/
+            agent.SetDestination(carrot.transform.position);
+            if (agent.remainingDistance < accuracy && !sleep)
             {
                 hasDetectedCarrot = false;
                 eating = true;
             }
         }
 
-        this.transform.Translate(0, 0, speed * Time.deltaTime);
+        this.transform.Translate(0, 0, agent.speed * Time.deltaTime);
 
         if (running)
         {
@@ -109,7 +112,7 @@ public class COMRacer : MonoBehaviour
             running = false;
             if (timer < timeLimit)
             {
-                speed = 0;
+                agent.speed = 0;
                 moodText.text = "Mood: Eating";
             }
             if (timer > timeLimit)
@@ -117,7 +120,7 @@ public class COMRacer : MonoBehaviour
                 eating = false;
                 running = true;
                 timer = 0;
-                speed = defaultSpeed;
+                agent.speed = defaultSpeed;
                 carrot.gameObject.SetActive(false);
                 moodText.text = "Mood: Normal";
                 if (rage)
@@ -129,20 +132,20 @@ public class COMRacer : MonoBehaviour
 
         if (!sleep && rage && stamina <= defaultThreshold) //Rival's default state
         {
-            speed = defaultSpeed;
+            agent.speed = defaultSpeed;
             rage = false;
             running = true;
             moodText.text = "Mood: Normal";
         }
         if (stamina < sleepThreshold) //Rival falls asleep on the spot
         {
-            speed = 0;
+            agent.speed = 0;
             moodText.text = "Mood: Zzz...";
             sleep = true;
         }
         if (sleep && stamina > wakeThreshold) //Rival wakes up in a rage and blasts off
         {
-            speed = rageSpeed;
+            agent.speed = rageSpeed;
             sleep = false;
             rage = true;
             running = true;

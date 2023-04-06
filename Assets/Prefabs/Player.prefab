@@ -220,7 +220,7 @@ MonoBehaviour:
   lapText: {fileID: 0}
   finalLapText: {fileID: 0}
   victoryText: {fileID: 0}
-  timeLimit: 2.75
+  timeLimit: 2.25
 --- !u!1 &6644281410454971803
 GameObject:
   m_ObjectHideFlags: 0

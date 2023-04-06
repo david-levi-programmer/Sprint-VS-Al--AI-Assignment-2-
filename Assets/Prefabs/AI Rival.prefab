@@ -130,14 +130,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  agent: {fileID: 0}
+  agent: {fileID: 4511547332996017986}
   hasDetectedCarrot: 0
   timer: 0
   timeLimit: 8
+  accuracy: 1
   lap: 0
   defaultSpeed: 19
   rageSpeed: 45
-  turnSpeed: 10
   defaultThreshold: 25
   sleepThreshold: 10
   wakeThreshold: 33.5
