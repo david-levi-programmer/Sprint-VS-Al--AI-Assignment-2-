@@ -62,7 +62,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        //TODO - Maybe if there's time, we can think about adding a jump function
     }
 
     private void OnTriggerEnter(Collider collider)

@@ -14,7 +14,7 @@ public class COMRacer : MonoBehaviour
     public float timer;
     public float timeLimit;
 
-    int currentWaypoint = 0;
+    public int currentWaypoint = 0;
     public float accuracy;
     public int lap;
 
@@ -65,9 +65,12 @@ public class COMRacer : MonoBehaviour
             Vector3 direction = target - this.transform.position;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction),
                                         Time.deltaTime * turnSpeed);*/
+            agent.SetDestination(waypoints[currentWaypoint].transform.position);
 
             if (agent.remainingDistance < agent.radius)
             {
+                //TODO - Figure out how to make it go to the waypoints in order
+                //instead of whichever's closest
                 currentWaypoint++;
                 if (currentWaypoint >= waypoints.Length)
                 {
@@ -92,7 +95,7 @@ public class COMRacer : MonoBehaviour
             }
         }
 
-        this.transform.Translate(0, 0, agent.speed * Time.deltaTime);
+        transform.Translate(0, 0, agent.speed * Time.deltaTime);
 
         if (running)
         {
@@ -160,7 +163,7 @@ public class COMRacer : MonoBehaviour
 
     public void GetCarrot(Vector3 position)
     {
-        if (Vector3.Distance(position, this.transform.position) < detectionArea)
+        if (Vector3.Distance(position, transform.position) < detectionArea)
         {
             carrot = GameObject.FindGameObjectWithTag("Carrot");
             hasDetectedCarrot = true;

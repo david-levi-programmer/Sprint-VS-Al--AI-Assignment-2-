@@ -207,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465730657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 53.3, y: -0.81, z: -54.7}
+  m_LocalPosition: {x: 92.2, y: -0.81, z: -42.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1499,7 +1499,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423518479}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 76.9, y: -0.81, z: 81.4}
+  m_LocalPosition: {x: 39.9, y: -0.81, z: 81.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1607,7 +1607,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863447416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.8, y: -0.81, z: 6.3}
+  m_LocalPosition: {x: 51.8, y: -0.81, z: 27.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1717,10 +1717,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 559507861}
     m_Modifications:
-    - target: {fileID: 599360177514920444, guid: 835e0df457f2af94a95ccdc5dd9bfab4, type: 3}
-      propertyPath: m_Radius
-      value: 5.12
-      objectReference: {fileID: 0}
     - target: {fileID: 599360177514920446, guid: 835e0df457f2af94a95ccdc5dd9bfab4, type: 3}
       propertyPath: m_Name
       value: Point 1
@@ -2081,20 +2077,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1768969155}
     - target: {fileID: 4511547332996017986, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
-      propertyPath: m_Radius
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4511547332996017986, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
-      propertyPath: m_AutoBraking
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4511547332996017986, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
       propertyPath: m_Acceleration
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4511547332996017986, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
       propertyPath: m_AngularSpeed
       value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4511547332996017986, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
