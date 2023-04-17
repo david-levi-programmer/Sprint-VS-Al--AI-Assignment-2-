@@ -122,7 +122,7 @@ public class COMRacer : MonoBehaviour
                 running = true;
                 timer = 0;
                 agent.speed = defaultSpeed;
-                carrot.gameObject.SetActive(false);
+                carrot.SetActive(false);
                 moodText.text = "Mood: Normal";
                 if (rage)
                 {
@@ -172,7 +172,7 @@ public class COMRacer : MonoBehaviour
 
     private void LapTrigger(Collider collider)
     {
-        if (collider.gameObject.tag == "Finish")
+        if (collider.gameObject.CompareTag("Finish"))
         {
             lap += 1;
         }

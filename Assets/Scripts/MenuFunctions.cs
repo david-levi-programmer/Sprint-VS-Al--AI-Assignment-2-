@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,15 +7,38 @@ public class MenuFunctions : MonoBehaviour
     public GameObject mainMenu;
     public GameObject instructions;
 
+    private static MenuFunctions instance;
+
     private void Awake()
     {
-        mainMenu.SetActive(true);
-        instructions.SetActive(false);
+        if (SceneManager.GetActiveScene().name == "Forest Speedway")
+        {
+            mainMenu.SetActive(false);
+        }
+        if (SceneManager.GetActiveScene().name == "Main Menu")
+        {
+            mainMenu.SetActive(true);
+        }
+        instance = this;
+    }
+
+    public static MenuFunctions GetInstance()
+    {
+        return instance;
     }
 
     public void GoToGame()
     {
-        SceneManager.LoadScene("Forest Speedway");
+        Time.timeScale = 1;
+        if (SceneManager.GetActiveScene().name == "Forest Speedway")
+        {
+            Player.GetInstance().UnPause();
+            mainMenu.SetActive(false);
+        }
+        else
+        {
+            SceneManager.LoadScene("Forest Speedway");
+        }
     }
 
     public void GoToMenu()
@@ -34,6 +58,12 @@ public class MenuFunctions : MonoBehaviour
     {
         mainMenu.SetActive(false);
         instructions.SetActive(true);
+    }
+
+    public void PauseGame()
+    {
+        Player.GetInstance().paused = true;
+        mainMenu.SetActive(true);
     }
 
     public void ExitGame()
