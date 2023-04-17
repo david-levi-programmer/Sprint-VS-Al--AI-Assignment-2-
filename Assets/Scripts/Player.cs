@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public TMP_Text finalLapText;
     public TMP_Text victoryText;
     public TMP_Text carrotText;
+    public GameObject resultsMenu;
 
     float messageTimer;
     public float timeLimit;
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
         rival = GameObject.FindGameObjectWithTag("Rival");
         finalLapText.gameObject.SetActive(false);
         victoryText.gameObject.SetActive(false);
+        resultsMenu.SetActive(false);
         messageShown = false;
         instance = this;
     }
@@ -62,6 +64,9 @@ public class Player : MonoBehaviour
         if (lap > Timer.GetInstance().lapLimit)
         {
             victoryText.gameObject.SetActive(true);
+            paused = true;
+            Timer.GetInstance().timerOn = false;
+            resultsMenu.SetActive(true);
         }
         else if (lap == Timer.GetInstance().lapLimit)
         {
@@ -103,6 +108,7 @@ public class Player : MonoBehaviour
         rival.GetComponent<COMRacer>().staminaText.gameObject.SetActive(true);
         rival.GetComponent<COMRacer>().moodText.gameObject.SetActive(true);
         Timer.GetInstance().timerText.gameObject.SetActive(true);
+        MenuFunctions.GetInstance().mainMenu.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider collider)

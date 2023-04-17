@@ -180,6 +180,9 @@ public class COMRacer : MonoBehaviour
         if (lap > Timer.GetInstance().lapLimit)
         {
             loseText.gameObject.SetActive(true);
+            Player.GetInstance().paused = true;
+            Timer.GetInstance().timerOn = false;
+            Player.GetInstance().resultsMenu.SetActive(true);
         }
     }
 }

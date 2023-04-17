@@ -1,4 +1,3 @@
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +18,7 @@ public class MenuFunctions : MonoBehaviour
         {
             mainMenu.SetActive(true);
         }
+        instructions.SetActive(false);
         instance = this;
     }
 
@@ -32,10 +32,16 @@ public class MenuFunctions : MonoBehaviour
         Time.timeScale = 1;
         if (SceneManager.GetActiveScene().name == "Forest Speedway")
         {
-            Player.GetInstance().UnPause();
             mainMenu.SetActive(false);
+            instructions.SetActive(false);
+            Player.GetInstance().UnPause();
         }
         else
+        {
+            SceneManager.LoadScene("Forest Speedway");
+        }
+
+        if (Timer.GetInstance().timerOn == false)
         {
             SceneManager.LoadScene("Forest Speedway");
         }
