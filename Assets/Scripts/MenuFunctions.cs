@@ -6,21 +6,22 @@ public class MenuFunctions : MonoBehaviour
     public GameObject mainMenu;
     public GameObject instructions;
 
-    private static MenuFunctions instance;
+    private static MenuFunctions instance; //so that other scripts can communicate with this one
 
     private void Awake()
     {
-        if (SceneManager.GetActiveScene().name == "Forest Speedway")
+        //check if we're in the menu or on the track
+        if (SceneManager.GetActiveScene().name == "Forest Speedway") //if on the track...
         {
-            //In-game, this is set to be the pause menu, so don't start with the pause menu open
+            //...don't start with the menu open, because in-game, this is set to be the pause menu
             mainMenu.SetActive(false);
         }
-        if (SceneManager.GetActiveScene().name == "Main Menu")
+        if (SceneManager.GetActiveScene().name == "Main Menu") //if in the menu...
         {
-            //This is set to the main menu in the menu scene, so have the menu open on start-up
+            //...then have the menu open on start-up
             mainMenu.SetActive(true);
         }
-        instructions.SetActive(false);
+        instructions.SetActive(false); //either way, don't show the instructions on start-up
         instance = this;
     }
 
@@ -31,13 +32,13 @@ public class MenuFunctions : MonoBehaviour
 
     public void GoToGame()
     {
-        //Unfreeze everything when returning from the pause menu, results screen
-        Time.timeScale = 1; //Or from the main menu after clicking 'back to menu' in the pause menu
-        if (SceneManager.GetActiveScene().name == "Forest Speedway") //In-game, this works a 'resume' function
+        //Unfreeze everything when returning from the pause menu, the results screen...
+        Time.timeScale = 1; //...or from the main menu after clicking 'back to menu' in the pause menu
+        if (SceneManager.GetActiveScene().name == "Forest Speedway") //In-game, this works as a 'resume' function
         {
-            mainMenu.SetActive(false);
+            mainMenu.SetActive(false); //put away the pause menu
             instructions.SetActive(false);
-            Player.GetInstance().UnPause();
+            Player.GetInstance().UnPause(); //put the player's HUD back on-screen
         }
         else //In the main menu, this takes you to the game
         {
@@ -68,14 +69,14 @@ public class MenuFunctions : MonoBehaviour
     public void ShowInstructions()
     {
         //I was intially going to have the instructions available in the pause menu
-        //but switching them on and off didn't work right, so I just removed that button
+        //but switching them on and off didn't work right, so I just removed that button from the pause menu
         mainMenu.SetActive(false);
-        instructions.SetActive(true);
+        instructions.SetActive(true); //so in-game, this goes unused
     }
 
     public void PauseGame() //Called by the player with the 'P' key
     {
-        Player.GetInstance().paused = true;
+        Player.GetInstance().paused = true; //everything is frozen
         mainMenu.SetActive(true); //When the game's paused, show the menu
     }
 

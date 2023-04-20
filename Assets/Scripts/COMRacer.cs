@@ -34,6 +34,7 @@ public class COMRacer : MonoBehaviour
     private bool sleep;
     private bool rage;
 
+    //all the HUD elements
     public TMP_Text staminaText;
     public TMP_Text moodText; //his current state
     public TMP_Text loseText; //when it finishes before the player
@@ -68,7 +69,7 @@ public class COMRacer : MonoBehaviour
             }
         }
 
-        LapTrigger(lapDetect);
+        LapTrigger(lapDetect); //when the AI's crossed the finish line, increase his lap count
 
         if (!hasDetectedCarrot) //when the player hasn't dropped a carrot to distract the AI...
         {
@@ -87,7 +88,7 @@ public class COMRacer : MonoBehaviour
 
         if (running)
         {
-            stamina -= Time.deltaTime; //Rival's energy depletes over time...
+            stamina -= Time.deltaTime; //when he's running, the Rival's energy depletes over time...
         }
         if (sleep) //...except when he's asleep, which restores his energy
         {
@@ -169,10 +170,12 @@ public class COMRacer : MonoBehaviour
         
         if (lap > Timer.GetInstance().lapLimit) //When the AI finishes before the player
         {
+            //both him and the player get how many laps there are from the timer script
             loseText.gameObject.SetActive(true); //'you lose...' appears on-screen
             Player.GetInstance().paused = true; //when this variable is true, everything stops
             Timer.GetInstance().timerOn = false; //stop the timer
-            //the player script already has a 'resultsMenu' object tied to it, so it just makes to reuse it
+            //there's already a 'resultsMenu' object for the player,
+            //so it just makes sense to reuse it instead of copying it for the AI
             Player.GetInstance().resultsMenu.SetActive(true);
         }
     }
