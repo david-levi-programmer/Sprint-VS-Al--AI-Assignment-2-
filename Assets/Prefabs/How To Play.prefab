@@ -480,12 +480,13 @@ MonoBehaviour:
     he will fall asleep. His stamina will recharge while he's sleeping and he will
     eventually wake up. And when he does, he will be <i>hopping mad</i>, making him
     even faster than normal.\n\n<i>Controls:</i>\n\u2191/W: Move Forward  \t\t         
-    \t\t\t                    \u2193/S: Move Backward\n\u2190/A: Turn Left\t\t\t\t        
-    \t\t\t\t       \u2192/D: Turn Right\nSpace: Drop carrot. Al will stop what he's
-    doing and run towards the carrot. Once he reaches it, he will stop to finish
-    eating it before getting back to the race. Eating it will refill his stamina,
-    however. You only have 3 carrots to distract him with and there's no getting
-    them back, so use them wisely."
+    \t\t\t                            \u2193/S: Move Backward\n\u2190/A: Turn Left\t\t\t\t        
+    \t\t\t\t               \u2192/D: Turn Right\nSpace: Drop carrot. Al will stop
+    what he's doing and run towards the carrot. Once he reaches it, he will stop
+    to finish eating it before getting back to the race. Eating it will refill his
+    stamina, however. You only have 3 carrots to distract him with and there's no
+    getting them back, so use them wisely.\nPause with the 'P' key. Press 'M' to
+    switch to the overhead camera."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -512,7 +513,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27
+  m_fontSize: 25.5
   m_fontSizeBase: 32.12
   m_fontWeight: 400
   m_enableAutoSizing: 1

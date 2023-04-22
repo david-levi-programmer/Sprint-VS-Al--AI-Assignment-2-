@@ -43,7 +43,7 @@ public class COMRacer : MonoBehaviour
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint"); //find where the waypoints are
         agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(waypoints[currentWaypoint].transform.position); //head for the first waypoint
+        //agent.SetDestination(waypoints[currentWaypoint].transform.position); //head for the first waypoint
         collision = GetComponent<SphereCollider>(); //this is for finding the carrot dropped by the player
         lapDetect = GetComponent<BoxCollider>(); //this is for detecting when he's crossed the finish line
         detectionArea = collision.radius;
@@ -58,92 +58,95 @@ public class COMRacer : MonoBehaviour
 
     void Update()
     {
-        if (waypoints.Length == 0) return; //if there's no waypoints to follow, the AI can't function
+        if (Timer.GetInstance().countdownLoop > 2)
+        {
+            if (waypoints.Length == 0) return; //if there's no waypoints to follow, the AI can't function
 
-        if (agent.remainingDistance < agent.radius) //when he's reached the waypoint...
-        {
-            currentWaypoint++; //...move on to the next
-            if (currentWaypoint >= waypoints.Length) //when he's crossed all the waypoints...
+            if (agent.remainingDistance < agent.radius) //when he's reached the waypoint...
             {
-                currentWaypoint = 0; //...head back to the first
-            }
-        }
-
-        LapTrigger(lapDetect); //when the AI's crossed the finish line, increase his lap count
-
-        if (!hasDetectedCarrot) //when the player hasn't dropped a carrot to distract the AI...
-        {
-            agent.SetDestination(waypoints[currentWaypoint].transform.position); //...follow the waypoints as normal
-        }
-        else //if there is a carrot and the AI has detected it...
-        {
-            agent.SetDestination(carrot.transform.position); //...forget the race, he's hungry!
-            if (agent.remainingDistance < accuracy && !sleep) //when he's reached it...
-            {
-                hasDetectedCarrot = false;
-                eating = true; //...bon appetite! When he's full...
-                agent.SetDestination(waypoints[currentWaypoint].transform.position); //...back to the race!
-            }
-        }
-
-        if (running)
-        {
-            stamina -= Time.deltaTime; //when he's running, the Rival's energy depletes over time...
-        }
-        if (sleep) //...except when he's asleep, which restores his energy
-        {
-            stamina += Time.deltaTime;
-            running = false;
-        }
-        if (eating) //eating also restores his energy
-        {
-            stamina += Time.deltaTime;
-            timer += Time.deltaTime; //he has a timer for eating the carrot
-            running = false;
-            if (timer < timeLimit) //he won't be moving until he's finished eating
-            {
-                agent.speed = 0;
-                moodText.text = "Mood: Eating";
-            }
-            if (timer > timeLimit) //once he's full...
-            {
-                eating = false;
-                running = true; //...back to the race
-                timer = 0; //reset the timer in case there's another carrot
-                carrot.SetActive(false); //he's finished off the carrot
-                agent.speed = defaultSpeed; //back to his normal state...
-                moodText.text = "Mood: Normal";
-                if (rage) //...unless he was angry before he found the carrot
+                currentWaypoint++; //...move on to the next
+                if (currentWaypoint >= waypoints.Length) //when he's crossed all the waypoints...
                 {
-                    moodText.text = "Mood: #@*!!!!!"; //in case back to blinding rage
-                    agent.speed = rageSpeed;
+                    currentWaypoint = 0; //...head back to the first
                 }
             }
-        }
 
-        if (!sleep && rage && stamina <= defaultThreshold) //Rival's default state
-        {
-            agent.speed = defaultSpeed; //this is his usual speed, only a bit faster than the player
-            rage = false; //he's calmed down now
-            running = true; //when his stamina's low enough, however...
-            moodText.text = "Mood: Normal";
-        }
-        if (stamina < sleepThreshold) //...he falls asleep on the spot once his stamina's low enough
-        {
-            agent.speed = 0; //He's not a sleepwalker
-            moodText.text = "Mood: Zzz...";
-            sleep = true; //but his stamina comes back and when it reaches a certain amount...
-        }
-        if (sleep && stamina > wakeThreshold) //...he wakes up in a rage and blasts off!
-        {
-            agent.speed = rageSpeed; //his fury makes him even faster!
-            sleep = false; //Oh, he is wide awake, now
-            rage = true;
-            running = true;
-            moodText.text = "Mood: #@*!!!!!"; //And he has some choice words for you
-        }
+            LapTrigger(lapDetect); //when the AI's crossed the finish line, increase his lap count
 
-        DisplayStamina();
+            if (!hasDetectedCarrot) //when the player hasn't dropped a carrot to distract the AI...
+            {
+                agent.SetDestination(waypoints[currentWaypoint].transform.position); //...follow the waypoints as normal
+            }
+            else //if there is a carrot and the AI has detected it...
+            {
+                agent.SetDestination(carrot.transform.position); //...forget the race, he's hungry!
+                if (agent.remainingDistance < accuracy && !sleep) //when he's reached it...
+                {
+                    hasDetectedCarrot = false;
+                    eating = true; //...bon appetite! When he's full...
+                    agent.SetDestination(waypoints[currentWaypoint].transform.position); //...back to the race!
+                }
+            }
+
+            if (running)
+            {
+                stamina -= Time.deltaTime; //when he's running, the Rival's energy depletes over time...
+            }
+            if (sleep) //...except when he's asleep, which restores his energy
+            {
+                stamina += Time.deltaTime;
+                running = false;
+            }
+            if (eating) //eating also restores his energy
+            {
+                stamina += Time.deltaTime;
+                timer += Time.deltaTime; //he has a timer for eating the carrot
+                running = false;
+                if (timer < timeLimit) //he won't be moving until he's finished eating
+                {
+                    agent.speed = 0;
+                    moodText.text = "Mood: Eating";
+                }
+                if (timer > timeLimit) //once he's full...
+                {
+                    eating = false;
+                    running = true; //...back to the race
+                    timer = 0; //reset the timer in case there's another carrot
+                    carrot.SetActive(false); //he's finished off the carrot
+                    agent.speed = defaultSpeed; //back to his normal state...
+                    moodText.text = "Mood: Normal";
+                    if (rage) //...unless he was angry before he found the carrot
+                    {
+                        moodText.text = "Mood: #@*!!!!!"; //in case back to blinding rage
+                        agent.speed = rageSpeed;
+                    }
+                }
+            }
+
+            if (!sleep && rage && stamina <= defaultThreshold) //Rival's default state
+            {
+                agent.speed = defaultSpeed; //this is his usual speed, only a bit faster than the player
+                rage = false; //he's calmed down now
+                running = true; //when his stamina's low enough, however...
+                moodText.text = "Mood: Normal";
+            }
+            if (stamina < sleepThreshold) //...he falls asleep on the spot once his stamina's low enough
+            {
+                agent.speed = 0; //He's not a sleepwalker
+                moodText.text = "Mood: Zzz...";
+                sleep = true; //but his stamina comes back and when it reaches a certain amount...
+            }
+            if (sleep && stamina > wakeThreshold) //...he wakes up in a rage and blasts off!
+            {
+                agent.speed = rageSpeed; //his fury makes him even faster!
+                sleep = false; //Oh, he is wide awake, now
+                rage = true;
+                running = true;
+                moodText.text = "Mood: #@*!!!!!"; //And he has some choice words for you
+            }
+
+            DisplayStamina();
+        }
     }
 
     void DisplayStamina() //so that you can see how Al's doing
