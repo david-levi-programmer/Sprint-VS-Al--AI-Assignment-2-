@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     public GameObject carrot; //the carrot the player can drop
     GameObject rival; //So that this script can tell the AI script what's up
+    Transform nose; //So that you can see which direction you're facing in top-down view
 
     //all the HUD elements
     public TMP_Text lapText;
@@ -39,6 +40,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         rival = GameObject.FindGameObjectWithTag("Rival"); //find the AI rival so you can talk to him
+        nose = this.gameObject.transform.GetChild(0); //get the child of the player object
+        nose.gameObject.SetActive(false); //this should only be visible in top-down view
         //the race just started, don't show all this yet!
         finalLapText.gameObject.SetActive(false);
         victoryText.gameObject.SetActive(false);
@@ -107,7 +110,7 @@ public class Player : MonoBehaviour
             if (paused)
             {
                 Time.timeScale = 0; //Freeze everything
-                                    //Hide the in-game HUD elements while paused
+                //Hide the in-game HUD elements while paused
                 lapText.gameObject.SetActive(false);
                 carrotText.gameObject.SetActive(false);
                 rival.GetComponent<COMRacer>().staminaText.gameObject.SetActive(false);
@@ -115,15 +118,17 @@ public class Player : MonoBehaviour
                 Timer.GetInstance().timerText.gameObject.SetActive(false);
             }
 
-            if (Input.GetKeyDown(KeyCode.M) && playerCam.enabled)
+            if (Input.GetKeyDown(KeyCode.M) && playerCam.enabled) //Press P in normal view
             {
-                playerCam.enabled = false;
-                overheadCamera.enabled = true;
+                playerCam.enabled = false; //Switch off behind-the-back cam...
+                overheadCamera.enabled = true; //...turn on overhead camera
+                nose.gameObject.SetActive(true); //Show which direction you're facing
             }
-            else if (Input.GetKeyDown(KeyCode.M) && !playerCam.enabled)
+            else if (Input.GetKeyDown(KeyCode.M) && !playerCam.enabled) //Press P again...
             {
-                playerCam.enabled = true;
-                overheadCamera.enabled = false;
+                playerCam.enabled = true; //...and go back to over-the-shoulder
+                overheadCamera.enabled = false; //Switch off the overhead camera
+                nose.gameObject.SetActive(false); //You won't be needing this anymore
             }
         }
     }

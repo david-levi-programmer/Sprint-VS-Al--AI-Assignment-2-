@@ -107,9 +107,9 @@ NavMeshSettings:
     serializedVersion: 2
     agentTypeID: 0
     agentRadius: 2.53
-    agentHeight: 2
+    agentHeight: 0.05
     agentSlope: 0
-    agentClimb: 0.4
+    agentClimb: 0
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -250,7 +250,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465730657}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1645,7 +1645,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423518479}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1758,7 +1758,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863447416}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1925,6 +1925,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 559507861}
     m_Modifications:
+    - target: {fileID: 599360177514920445, guid: 835e0df457f2af94a95ccdc5dd9bfab4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 599360177514920446, guid: 835e0df457f2af94a95ccdc5dd9bfab4, type: 3}
       propertyPath: m_Name
       value: Point 1
@@ -2027,10 +2031,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 871802141576896147, guid: 928123ebc81a7ca49a94e6bebab5181e, type: 3}
-      propertyPath: lapLimit
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 871802141576896147, guid: 928123ebc81a7ca49a94e6bebab5181e, type: 3}
       propertyPath: timerText
       value: 
       objectReference: {fileID: 490906135}
@@ -2077,7 +2077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2568003778844971930, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2568003779079377475, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_Pivot.x
@@ -2169,15 +2169,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2568003779179356749, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2568003779254148079, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2568003779675169817, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268000778699685519, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 325
       objectReference: {fileID: 0}
     - target: {fileID: 3268000778699685519, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2226,6 +2230,10 @@ PrefabInstance:
     - target: {fileID: 4143258633702249730, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328893967345839979, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 61.09
       objectReference: {fileID: 0}
     - target: {fileID: 4345610157182707386, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2300,12 +2308,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6679805760783252909, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 325
+      objectReference: {fileID: 0}
+    - target: {fileID: 6679805760783252909, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 132
       objectReference: {fileID: 0}
     - target: {fileID: 6802439423427204001, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111312802793461311, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
+      propertyPath: m_text
+      value: YOU WIN!!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111312802793461311, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 61.09
       objectReference: {fileID: 0}
     - target: {fileID: 8084871347309961032, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
@@ -2331,10 +2351,6 @@ PrefabInstance:
     - target: {fileID: 3932835650828492729, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
       propertyPath: m_Name
       value: AI Rival
-      objectReference: {fileID: 0}
-    - target: {fileID: 3932835650828492731, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3932835650828492732, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
       propertyPath: m_RootOrder
@@ -2381,8 +2397,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3932835650828492735, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
-      propertyPath: accuracy
-      value: 12.12
+      propertyPath: lap
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3932835650828492735, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
       propertyPath: loseText
@@ -2393,6 +2409,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1073488964}
     - target: {fileID: 3932835650828492735, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
+      propertyPath: rageSpeed
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932835650828492735, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
       propertyPath: turnSpeed
       value: 50
       objectReference: {fileID: 0}
@@ -2400,6 +2420,18 @@ PrefabInstance:
       propertyPath: staminaText
       value: 
       objectReference: {fileID: 1768969155}
+    - target: {fileID: 3932835650828492735, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
+      propertyPath: defaultSpeed
+      value: 27.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932835650828492735, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
+      propertyPath: wakeThreshold
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4511547332996017986, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
+      propertyPath: m_Height
+      value: 0.00001
+      objectReference: {fileID: 0}
     - target: {fileID: 4511547332996017986, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
       propertyPath: m_Acceleration
       value: 60
@@ -2410,7 +2442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4511547332996017986, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
       propertyPath: m_StoppingDistance
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}

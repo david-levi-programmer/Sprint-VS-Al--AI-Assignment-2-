@@ -8,7 +8,6 @@ public class COMRacer : MonoBehaviour
     public NavMeshAgent agent; //the navMesh is really only so the AI is aware of walls
     GameObject carrot; //he will find this when the player drops it
     SphereCollider collision; //how it finds the carrot
-    BoxCollider lapDetect; //the collider used for the finish line
 
     public bool hasDetectedCarrot;
     public float timer; //how long he's been eating the carrot
@@ -45,7 +44,6 @@ public class COMRacer : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         //agent.SetDestination(waypoints[currentWaypoint].transform.position); //head for the first waypoint
         collision = GetComponent<SphereCollider>(); //this is for finding the carrot dropped by the player
-        lapDetect = GetComponent<BoxCollider>(); //this is for detecting when he's crossed the finish line
         detectionArea = collision.radius;
         stamina = defaultThreshold; //the AI starts in its normal state
         hasDetectedCarrot = false; //there won't be a carrot when the race starts, but that could change...
@@ -70,8 +68,6 @@ public class COMRacer : MonoBehaviour
                     currentWaypoint = 0; //...head back to the first
                 }
             }
-
-            LapTrigger(lapDetect); //when the AI's crossed the finish line, increase his lap count
 
             if (!hasDetectedCarrot) //when the player hasn't dropped a carrot to distract the AI...
             {
@@ -117,7 +113,7 @@ public class COMRacer : MonoBehaviour
                     moodText.text = "Mood: Normal";
                     if (rage) //...unless he was angry before he found the carrot
                     {
-                        moodText.text = "Mood: #@*!!!!!"; //in case back to blinding rage
+                        moodText.text = "Mood: #@*!!!!!"; //in which case back to blinding rage
                         agent.speed = rageSpeed;
                     }
                 }
@@ -163,17 +159,19 @@ public class COMRacer : MonoBehaviour
         }
     }
 
-    private void LapTrigger(Collider collider) //What happens when it crosses the finish line
+    private void OnTriggerEnter(Collider collider) //What happens when it crosses the finish line
     {
         if (collider.gameObject.CompareTag("Finish")) //Onto the next lap
         {
-            lap += 1;
-            Debug.Log("Al has finished lap 1.");
+            //Make the sphere collider ignore the finish line
+            Physics.IgnoreCollision(collider, collision, true); //This way, only his box collider will trigger it
+            lap += 1; //Increase the AI's lap count
+            Debug.Log("Al is on Lap " + lap + ".");
         }
         
         if (lap > Timer.GetInstance().lapLimit) //When the AI finishes before the player
         {
-            //both him and the player get how many laps there are from the timer script
+            //Both him and the player get how many laps there are from the timer script
             loseText.gameObject.SetActive(true); //'you lose...' appears on-screen
             Player.GetInstance().paused = true; //when this variable is true, everything stops
             Timer.GetInstance().timerOn = false; //stop the timer

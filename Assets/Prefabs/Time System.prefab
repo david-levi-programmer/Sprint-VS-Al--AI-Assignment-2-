@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 0}
+  resultsText: {fileID: 0}
+  countdownText: {fileID: 0}
   currentTime: 0
   timerOn: 0
-  lapLimit: 0
+  lapLimit: 3
+  countdownLoop: 0
