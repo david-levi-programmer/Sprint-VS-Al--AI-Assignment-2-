@@ -42,8 +42,8 @@ public class Player : MonoBehaviour
         //the race just started, don't show all this yet!
         finalLapText.gameObject.SetActive(false);
         victoryText.gameObject.SetActive(false);
-        playerCam.gameObject.SetActive(true);
-        overheadCamera.gameObject.SetActive(false);
+        playerCam.enabled = true;
+        overheadCamera.enabled = false;
         resultsMenu.SetActive(false);
         messageShown = false; //you haven't been informed it's the final lap yet
         instance = this;
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
             transform.Translate(0, 0, translation); //actually moving
 
             //press Space to drop a carrot, but if you don't have any, you can't do it
-            if (Input.GetKeyDown(KeyCode.Space) && carrotSupply > 0) //How hard does it want the player to hit the button???
+            if (Input.GetKeyDown(KeyCode.Space) && carrotSupply > 0) //GetKeyDown seems to work best with VSync on
             {
                 Instantiate(carrot, transform.position, carrot.transform.rotation); //spawn the carrot
                 rival.GetComponent<COMRacer>().GetCarrot(carrot.transform.position); //give the AI a friendly heads up
@@ -115,15 +115,15 @@ public class Player : MonoBehaviour
                 Timer.GetInstance().timerText.gameObject.SetActive(false);
             }
 
-            if (Input.GetKey(KeyCode.M) && playerCam.gameObject.activeSelf)
+            if (Input.GetKeyDown(KeyCode.M) && playerCam.enabled)
             {
-                playerCam.gameObject.SetActive(false);
-                overheadCamera.gameObject.SetActive(true);
+                playerCam.enabled = false;
+                overheadCamera.enabled = true;
             }
-            else if (Input.GetKey(KeyCode.M) && !playerCam.gameObject.activeSelf)
+            else if (Input.GetKeyDown(KeyCode.M) && !playerCam.enabled)
             {
-                playerCam.gameObject.SetActive(true);
-                overheadCamera.gameObject.SetActive(false);
+                playerCam.enabled = true;
+                overheadCamera.enabled = false;
             }
         }
     }
