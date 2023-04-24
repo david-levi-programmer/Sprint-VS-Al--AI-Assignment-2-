@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public TMP_Text finalLapText;
     public TMP_Text victoryText;
     public TMP_Text carrotText;
+    public TMP_Text AILapText;
     public GameObject resultsMenu;
 
     //You don't need 'FINAL LAP!!!' flashing in your face all the time
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
         //the race just started, don't show all this yet!
         finalLapText.gameObject.SetActive(false);
         victoryText.gameObject.SetActive(false);
+        AILapText.gameObject.SetActive(false);
         playerCam.enabled = true;
         overheadCamera.enabled = false;
         resultsMenu.SetActive(false);
@@ -78,6 +80,7 @@ public class Player : MonoBehaviour
 
             //what lap you're on and how many you've got left
             lapText.text = "Lap " + lap + "/" + Timer.GetInstance().lapLimit;
+            AILapText.text = "Al Lap " + rival.GetComponent<COMRacer>().lap + "/" + Timer.GetInstance().lapLimit;
             carrotText.text = carrotSupply + " carrots left"; //how many carrots you've got
 
             if (lap > Timer.GetInstance().lapLimit) //You've crossed the finish line. Huzzah!
@@ -112,6 +115,7 @@ public class Player : MonoBehaviour
                 Time.timeScale = 0; //Freeze everything
                 //Hide the in-game HUD elements while paused
                 lapText.gameObject.SetActive(false);
+                AILapText.gameObject.SetActive(false);
                 carrotText.gameObject.SetActive(false);
                 rival.GetComponent<COMRacer>().staminaText.gameObject.SetActive(false);
                 rival.GetComponent<COMRacer>().moodText.gameObject.SetActive(false);
@@ -123,12 +127,14 @@ public class Player : MonoBehaviour
                 playerCam.enabled = false; //Switch off behind-the-back cam...
                 overheadCamera.enabled = true; //...turn on overhead camera
                 nose.gameObject.SetActive(true); //Show which direction you're facing
+                AILapText.gameObject.SetActive(true);
             }
             else if (Input.GetKeyDown(KeyCode.M) && !playerCam.enabled) //Press P again...
             {
                 playerCam.enabled = true; //...and go back to over-the-shoulder
                 overheadCamera.enabled = false; //Switch off the overhead camera
                 nose.gameObject.SetActive(false); //You won't be needing this anymore
+                AILapText.gameObject.SetActive(false);
             }
         }
     }
@@ -144,6 +150,11 @@ public class Player : MonoBehaviour
         rival.GetComponent<COMRacer>().moodText.gameObject.SetActive(true);
         Timer.GetInstance().timerText.gameObject.SetActive(true);
         MenuFunctions.GetInstance().mainMenu.SetActive(false);
+
+        if (!playerCam.enabled)
+        {
+            AILapText.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter(Collider collider) //when you've crossed the finish line...
