@@ -76,10 +76,11 @@ public class Timer : MonoBehaviour
         //...then tell Unity how to display it
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
-    //this is only separate because reusing the above function would put it in the top corner of the screen
-    //instead of in the middle of it
+    
     private void DisplayResults(float time)
     {
+        //this is only separate because reusing the above function would put it in the top corner of the screen
+        //instead of in the middle of it
         time += 1;
         float minutes = Mathf.FloorToInt(time / 60);
         float seconds = Mathf.FloorToInt(time % 60);

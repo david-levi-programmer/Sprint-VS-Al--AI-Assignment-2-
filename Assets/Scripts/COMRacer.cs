@@ -29,12 +29,12 @@ public class COMRacer : MonoBehaviour
 
     private bool running; //this is so the script knows when to decrease the AI's stamina
     private bool eating; //this is so it knows when to increase his stamina
-    //these booleans are additional conditions for the his states, to ensure he only enters them when he's supposed to
+    //these booleans are additional conditions for his states, to ensure he only enters them when he's supposed to
     private bool sleep;
     private bool rage;
 
     //all the HUD elements
-    public TMP_Text staminaText;
+    public TMP_Text staminaText; //how much stamina he has
     public TMP_Text moodText; //his current state
     public TMP_Text loseText; //when it finishes before the player
     
@@ -42,7 +42,6 @@ public class COMRacer : MonoBehaviour
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint"); //find where the waypoints are
         agent = GetComponent<NavMeshAgent>();
-        //agent.SetDestination(waypoints[currentWaypoint].transform.position); //head for the first waypoint
         collision = GetComponent<SphereCollider>(); //this is for finding the carrot dropped by the player
         detectionArea = collision.radius;
         stamina = defaultThreshold; //the AI starts in its normal state
