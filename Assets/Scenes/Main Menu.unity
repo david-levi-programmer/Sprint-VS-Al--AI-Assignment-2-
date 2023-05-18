@@ -1852,13 +1852,62 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 729911935}
     m_Modifications:
+    - target: {fileID: 1267519608905987496, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1088.8218
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267519608905987496, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 587.5904
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267519608905987496, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.33879852
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267519608905987496, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.55879974
+      objectReference: {fileID: 0}
     - target: {fileID: 2803229720079628053, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 976731681}
+    - target: {fileID: 2803229721389759357, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803229721389759358, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_text
+      value: "You are <b>SPRINT TORTISE</b> and you have just been challenged to
+        a foot-race by <b>AL HARE</b>.\n\nHowever, while Al is quite speedy, he is
+        prone to bouts of insomnia. His stamina is constantly draining, and when
+        it reaches a certain threshold, he will fall asleep. His stamina will recharge
+        while he's sleeping and he will eventually wake up. And when he does, he
+        will be <i>hopping mad</i>, making him even faster than normal.\n\n<i>Controls:</i>\n\u2191/W:
+        Move Forward  \t\t          \t\t\t                          \u2193/S: Move
+        Backward\n\u2190/A: Turn Left\t\t\t\t         \t\t\t\t                      
+        \u2192/D: Turn Right\nSpace: Drop carrot. Al will stop what he's doing and
+        run towards the carrot. Once he reaches it, he will stop to finish eating
+        it before getting back to the race. Eating it will refill his stamina, however.
+        You only have 3 carrots to distract him with and there's no getting them
+        back, so use them wisely.\nPause with the 'P' key. Press 'M' to switch to
+        the overhead camera."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803229721389759358, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_fontSize
+      value: 24.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803229721389759358, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
     - target: {fileID: 2803229722018370475, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
       propertyPath: m_Name
       value: How To Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803229722018370475, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2803229722018370476, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
       propertyPath: m_Pivot.x
@@ -1942,6 +1991,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2803229722018370476, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951974012233913498, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951974012233913498, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951974012233913498, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951974012233913498, guid: dade473ad18d1c2448d88c8ef1dcdbc0, type: 3}
+      propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
