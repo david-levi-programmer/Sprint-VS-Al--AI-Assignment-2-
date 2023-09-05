@@ -1,61 +1,62 @@
-using TMPro;
+using TMPro; //This enables the text elements to be used by the code
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.AI; //Enables the use of Unity's AI features
 
 public class COMRacer : MonoBehaviour
 {
-    public GameObject[] waypoints;
-    public NavMeshAgent agent; //the navMesh is really only so the AI is aware of walls
+    public GameObject[] waypoints; //the waypoints the AI follows to navigate the track
+    public NavMeshAgent agent; //the navMesh that allows him to stay on track and avoid walls
     GameObject carrot; //he will find this when the player drops it
-    SphereCollider collision; //how it finds the carrot
+    SphereCollider collision; //a second collider that keeps an eye out for the carrot
 
-    public bool hasDetectedCarrot;
+    public bool hasDetectedCarrot; //whether he's found the carrot
     public float timer; //how long he's been eating the carrot
-    public float timeLimit; //how long until he finishes
+    public float timeLimit; //how long until he finishes eating
 
-    public int currentWaypoint = 0;
-    public float accuracy; //how close he needs to be to the waypoint to count it and move on
-    public int lap;
+    public int currentWaypoint = 0; //the waypoint count starts at 0, so 0 is the first waypoint
+    public float accuracy; //how close he needs to the waypoint he needs to be to count it and move on
+    public int lap; //what lap he's on
 
     public float defaultSpeed; //the speed he runs at when in his normal state
-    public float rageSpeed; //the speed he runs at when his angry
+    public float rageSpeed; //the speed he runs at when he's angry
     private float detectionArea; //the range at which he can detect the carrot
 
-    public float stamina; //this is always counting down
-    //these thresholds are what stamina levels he needs to reach in order to trigger the states
-    public float defaultThreshold;
-    public float sleepThreshold;
-    public float wakeThreshold;
+    public float stamina; //this is always counting down, determing what mood he's in
+    //v the stamina levels he needs to reach in order to trigger the states
+    public float defaultThreshold; //when he returns to normal
+    public float sleepThreshold; //when he falls asleep
+    public float wakeThreshold; //when he wakes up
 
     private bool running; //this is so the script knows when to decrease the AI's stamina
     private bool eating; //this is so it knows when to increase his stamina
     //these booleans are additional conditions for his states, to ensure he only enters them when he's supposed to
-    private bool sleep;
-    private bool rage;
+    private bool sleep; //< has the same function as 'eating' but...
+    //...for the purposes of the AI's mood system, it's best to make this a seperate variable
+    private bool rage; //so that the script knows when to speed up the AI
 
-    //all the HUD elements
+    //v all the HUD elements
     public TMP_Text staminaText; //how much stamina he has
     public TMP_Text moodText; //his current state
     public TMP_Text loseText; //when it finishes before the player
     
-    void Start()
+    void Start() //Do this on the first frame of gameplay
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint"); //find where the waypoints are
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>(); //make use of the nav mesh
         collision = GetComponent<SphereCollider>(); //this is for finding the carrot dropped by the player
         detectionArea = collision.radius;
         stamina = defaultThreshold; //the AI starts in its normal state
-        hasDetectedCarrot = false; //there won't be a carrot when the race starts, but that could change...
-        sleep = false; //wide awake
-        //because he starts at the stamina threshold for the default state, he won't be angry once the race starts
-        rage = true; //it's just that also one of the conditions for his default state that he's angry
-        moodText.text = "Mood: Normal";
-        loseText.gameObject.SetActive(false); //the race just started, the player won't lose that fast!
+        hasDetectedCarrot = false; //there won't be a carrot when the race starts
+        sleep = false; //wide awake at the start of the race
+        //v This does not mean he is angry at the start of the race.
+        rage = true; //This will shut off once the race begins and he enters his normal state
+        moodText.text = "Mood: Normal"; //< Indicate that he is in his normal state
+        loseText.gameObject.SetActive(false); //don't show the lose text, the race just started!
     }
 
-    void Update()
+    void Update() //what happens every frame
     {
-        if (Timer.GetInstance().countdownLoop > 2)
+        if (Timer.GetInstance().countdownLoop > 2) //once the start countdown is over
         {
             if (waypoints.Length == 0) return; //if there's no waypoints to follow, the AI can't function
 
@@ -77,7 +78,7 @@ public class COMRacer : MonoBehaviour
                 agent.SetDestination(carrot.transform.position); //...forget the race, he's hungry!
                 if (agent.remainingDistance < accuracy && !sleep) //when he's reached it...
                 {
-                    hasDetectedCarrot = false;
+                    hasDetectedCarrot = false; //...switch off food-seeking and...
                     eating = true; //...bon appetite! When he's full...
                     agent.SetDestination(waypoints[currentWaypoint].transform.position); //...back to the race!
                 }
@@ -87,60 +88,60 @@ public class COMRacer : MonoBehaviour
             {
                 stamina -= Time.deltaTime; //when he's running, the Rival's energy depletes over time...
             }
-            if (sleep) //...except when he's asleep, which restores his energy
+            if (sleep) //...except when he's asleep...
             {
-                stamina += Time.deltaTime;
-                running = false;
+                stamina += Time.deltaTime; //...which restores his energy
+                running = false; //he's not running so it can't counteract the stamina increase
             }
             if (eating) //eating also restores his energy
             {
                 stamina += Time.deltaTime;
                 timer += Time.deltaTime; //he has a timer for eating the carrot
-                running = false;
-                if (timer < timeLimit) //he won't be moving until he's finished eating
+                running = false; //he's not running so it can't counteract the stamina increase
+                if (timer < timeLimit) //until he's finished eating...
                 {
-                    agent.speed = 0;
+                    agent.speed = 0; //...he won't be moving
                     moodText.text = "Mood: Eating";
                 }
-                if (timer > timeLimit) //once he's full...
+                if (timer > timeLimit) //once he's done eating...
                 {
-                    eating = false;
-                    running = true; //...back to the race
+                    eating = false; //...his stamina is no longer increasing
+                    running = true; //...back to the race, his stamina decreases again
                     timer = 0; //reset the timer in case there's another carrot
-                    carrot.SetActive(false); //he's finished off the carrot
+                    carrot.SetActive(false); //the carrot vanishes
                     agent.speed = defaultSpeed; //back to his normal state...
                     moodText.text = "Mood: Normal";
                     if (rage) //...unless he was angry before he found the carrot
                     {
-                        moodText.text = "Mood: #@*!!!!!"; //in which case back to blinding rage
+                        moodText.text = "Mood: #@*!!!!!"; //in which case back to BLINDING RAGE
                         agent.speed = rageSpeed;
                     }
                 }
             }
 
-            if (!sleep && rage && stamina <= defaultThreshold) //Rival's default state
+            if (!sleep && rage && stamina <= defaultThreshold) //if he was angry before...
             {
+                rage = false; //...he's calmed down now that he's in his normal state
                 agent.speed = defaultSpeed; //this is his usual speed, only a bit faster than the player
-                rage = false; //he's calmed down now
-                running = true; //when his stamina's low enough, however...
+                running = true; //his stamina is decreasing when he's running
                 moodText.text = "Mood: Normal";
             }
-            if (stamina < sleepThreshold) //...he falls asleep on the spot once his stamina's low enough
+            if (stamina < sleepThreshold) //he falls asleep on the spot once his stamina's low enough
             {
-                agent.speed = 0; //He's not a sleepwalker
-                moodText.text = "Mood: Zzz...";
-                sleep = true; //but his stamina comes back and when it reaches a certain amount...
+                agent.speed = 0; //He stops in his tracks
+                moodText.text = "Mood: Zzz..."; //and sleeps
+                sleep = true; //but his stamina comes back as he does so and when it reaches a certain amount...
             }
             if (sleep && stamina > wakeThreshold) //...he wakes up in a rage and blasts off!
             {
                 agent.speed = rageSpeed; //his fury makes him even faster!
-                sleep = false; //Oh, he is wide awake, now
+                sleep = false; //Oh, he is wide awake now so his stamina's not increasing
+                running = true; //In fact, it's decreasing again
                 rage = true;
-                running = true;
                 moodText.text = "Mood: #@*!!!!!"; //And he has some choice words for you
             }
 
-            DisplayStamina();
+            DisplayStamina(); //show his stamina on-screen
         }
     }
 
@@ -149,12 +150,12 @@ public class COMRacer : MonoBehaviour
         staminaText.text = "Al's Stamina: " + stamina;
     }
 
-    public void GetCarrot(Vector3 position) //called by the player script
+    public void GetCarrot(Vector3 position) //called by the player script, telling the AI to start looking
     {
-        if (Vector3.Distance(position, transform.position) < detectionArea) //When the AI smells it...
+        if (Vector3.Distance(position, transform.position) < detectionArea) //When the AI nears the carrot...
         {
-            carrot = GameObject.FindGameObjectWithTag("Carrot"); //It finds the object with this tag
-            hasDetectedCarrot = true;
+            carrot = GameObject.FindGameObjectWithTag("Carrot"); //...he checks it for this tag
+            hasDetectedCarrot = true; //he's found it and heads straight for it
         }
     }
 
@@ -162,10 +163,10 @@ public class COMRacer : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Finish")) //Onto the next lap
         {
-            //Make the sphere collider ignore the finish line
+            //Make the sphere collider ignore the finish line, that's for carrot-hunting
             Physics.IgnoreCollision(collider, collision, true); //This way, only his box collider will trigger it
             lap += 1; //Increase the AI's lap count
-            Debug.Log("Al is on Lap " + lap + ".");
+            Debug.Log("Al is on Lap " + lap + "."); //log it for debugging purposes
         }
         
         if (lap > Timer.GetInstance().lapLimit) //When the AI finishes before the player
@@ -175,7 +176,7 @@ public class COMRacer : MonoBehaviour
             Player.GetInstance().paused = true; //when this variable is true, everything stops
             Timer.GetInstance().timerOn = false; //stop the timer
             //there's already a 'resultsMenu' object for the player,
-            //so it just makes sense to reuse it instead of copying it for the AI
+            //so it just makes sense to reuse that instead of copying it for the AI
             Player.GetInstance().resultsMenu.SetActive(true);
         }
     }

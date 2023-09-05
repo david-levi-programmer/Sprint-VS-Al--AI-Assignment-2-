@@ -1467,6 +1467,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265533083}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1288872298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6895566098362601150, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
+  m_PrefabInstance: {fileID: 2568003779225583707}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1303660838
 GameObject:
   m_ObjectHideFlags: 0
@@ -2086,9 +2091,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1088458756360233424, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
+    - target: {fileID: 1037539581653883581, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088458756360233424, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1545581050286242023, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2258,6 +2267,10 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4291166719
       objectReference: {fileID: 0}
+    - target: {fileID: 3547830799437963802, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 887870621}
     - target: {fileID: 3942439826467784353, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2268,7 +2281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4143258633702249730, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4328893967345839979, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_fontSizeBase
@@ -2344,7 +2357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6223773618441311756, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6598870234755973845, guid: adcbd0144fdf90a4db262854740a33af, type: 3}
       propertyPath: m_IsActive
@@ -2497,6 +2510,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 550887909e63f9947b2f5063d8419d4e, type: 3}
+--- !u!1001 &4027060150529947503
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4027060150447354054, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027060150447354054, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027060150447354054, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027060150447354054, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027060150447354054, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027060150447354054, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027060150447354054, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027060150447354054, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027060150447354054, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027060150447354054, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027060150447354054, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027060150447354058, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
+      propertyPath: m_Name
+      value: Death Plane
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b11541c2d197e8943944b9c5a9c49184, type: 3}
 --- !u!1001 &6301604251217468555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2595,7 +2665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6644281409636750518, guid: bdc9e8967946ca947aeaa1774df10db0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.1
+      value: -0.3999999
       objectReference: {fileID: 0}
     - target: {fileID: 6644281409636750518, guid: bdc9e8967946ca947aeaa1774df10db0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2641,6 +2711,10 @@ PrefabInstance:
       propertyPath: AILapText
       value: 
       objectReference: {fileID: 1531302595}
+    - target: {fileID: 6644281409636750519, guid: bdc9e8967946ca947aeaa1774df10db0, type: 3}
+      propertyPath: deathMenu
+      value: 
+      objectReference: {fileID: 1288872298}
     - target: {fileID: 6644281409636750519, guid: bdc9e8967946ca947aeaa1774df10db0, type: 3}
       propertyPath: pauseMenu
       value: 

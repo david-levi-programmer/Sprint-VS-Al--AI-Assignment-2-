@@ -1,53 +1,54 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement; //enables the code to switch scenes and check for specific ones
 
+//This script is built to be used for ALL menus in the game, not just the start menu
 public class MenuFunctions : MonoBehaviour
 {
-    public GameObject mainMenu;
+    //v the HUD elements of the menu
+    public GameObject mainMenu; //This is called the 'main' menu, but in-game this will be the pause menu
     public GameObject instructions;
 
     private static MenuFunctions instance; //so that other scripts can communicate with this one
 
-    private void Awake()
+    private void Awake() //do this when loading into the scene
     {
         //check if we're in the menu or on the track
         if (SceneManager.GetActiveScene().name == "Forest Speedway") //if on the track...
         {
-            //...don't start with the menu open, because in-game, this is set to be the pause menu
-            mainMenu.SetActive(false);
+            mainMenu.SetActive(false); //...don't start with the pause menu open
         }
         if (SceneManager.GetActiveScene().name == "Main Menu") //if in the menu...
         {
-            //...then have the menu open on start-up
-            mainMenu.SetActive(true);
+            mainMenu.SetActive(true); //...then have the menu open on start-up
         }
         instructions.SetActive(false); //either way, don't show the instructions on start-up
         instance = this;
     }
 
-    public static MenuFunctions GetInstance()
+    public static MenuFunctions GetInstance() //called by the other scripts to communicate with each other
     {
         return instance;
     }
 
     public void GoToGame()
     {
-        //Unfreeze everything when returning from the pause menu, the results screen...
-        Time.timeScale = 1; //...or from the main menu after clicking 'back to menu' in the pause menu
-        if (SceneManager.GetActiveScene().name == "Forest Speedway") //In-game, this works as a 'resume' function
+        //v Unfreeze everything when returning from the pause menu, the results screen...
+        Time.timeScale = 1; //...or from the main menu to ensure nothing is frozen upon entering gameplay
+
+        if (SceneManager.GetActiveScene().name == "Forest Speedway") //If in-game, this is assigned as a 'resume' function
         {
             mainMenu.SetActive(false); //put away the pause menu
-            instructions.SetActive(false);
-            Player.GetInstance().UnPause(); //put the player's HUD back on-screen
+            instructions.SetActive(false); //and the instructions, just in case
+            Player.GetInstance().UnPause(); //and put the player's HUD back on-screen
         }
-        else //In the main menu, this takes you to the game
+        else //If in the main menu...
         {
-            SceneManager.LoadScene("Forest Speedway");
+            SceneManager.LoadScene("Forest Speedway"); //...head into the game
         }
 
         if (Timer.GetInstance().timerOn == false) //The only situation where the timer is off is when the race is over
         {
-            SceneManager.LoadScene("Forest Speedway"); //So this works as a restart function
+            SceneManager.LoadScene("Forest Speedway"); //So this can be assigned as a restart function
         }
     }
 
