@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     public int carrotSupply = 3; //There's no getting these back, so use them wisely
 
     private int lap; //The AI has their own lap variable though theirs is public
-    bool messageShown; //whether the final lap message has appeared
 
     public GameObject carrot; //the carrot the player can drop
     GameObject rival; //So that this script can tell the AI script what's up
@@ -28,6 +27,7 @@ public class Player : MonoBehaviour
     //You don't need 'FINAL LAP!!!' flashing in your face all the time
     float messageTimer; //How long messages like 'FINAL LAP!' is on-screen
     public float messageTimeLimit; //how long until the message disappears
+    bool messageShown; //whether the final lap message has appeared
 
     private static Player instance; //so that other scripts can communicate with this one
 
@@ -174,6 +174,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("FALL OUT");
             deathMenu.SetActive(true);
+            Timer.GetInstance().timerOn = false;
             Time.timeScale = 0;
         }
     }

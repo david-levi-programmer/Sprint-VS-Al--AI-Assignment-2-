@@ -77,18 +77,19 @@ public class MenuFunctions : MonoBehaviour
 
     public void PauseGame() //Called by the player with the 'P' key
     {
-        Player.GetInstance().paused = true; //everything is frozen
+        Player.GetInstance().paused = true; //this tells the player script to freeze everything
         mainMenu.SetActive(true); //When the game's paused, show the menu
     }
 
     public void ExitGame()
     {
-        //This will check if you're running the game in the unity editor
-        #if UNITY_EDITOR //if you are, it will exit play mode when you click 'quit'
+        //v This will check if you're running the game in the unity editor
+        #if UNITY_EDITOR //if so, it will exit play mode when you click 'quit'
         UnityEditor.EditorApplication.isPlaying = false;
-        #endif //if you're not, it will quit the application
+        #endif //if not, it will quit the application
         Application.Quit();
-        //This is because the editorapplication line on its own would cause compiling errors
-        //By using this preprocessor directive however, it will ignore that line when building the application
+        //This is because the 'EditorApplication' line on its own would cause compiling errors
+        //By using this preprocessor directive (the #if instead of the regular if function) however,
+        //that line will be ignored when building the application
     }
 }

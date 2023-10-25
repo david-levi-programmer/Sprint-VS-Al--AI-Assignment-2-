@@ -58,7 +58,7 @@ public class Timer : MonoBehaviour //This clock does more than just keep track o
         {
             currentTime += Time.deltaTime;
         }
-        else //when the timer is turned off, the race has ended...
+        else if (!timerOn && Player.GetInstance().deathMenu) //when the timer is turned off, the race has ended...
         {
             finalTime = currentTime; //...and we have our final time
             DisplayResults(finalTime); //display the results
