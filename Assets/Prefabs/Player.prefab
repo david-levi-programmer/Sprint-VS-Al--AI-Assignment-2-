@@ -221,8 +221,10 @@ MonoBehaviour:
   finalLapText: {fileID: 0}
   victoryText: {fileID: 0}
   carrotText: {fileID: 0}
+  AILapText: {fileID: 0}
   resultsMenu: {fileID: 0}
-  timeLimit: 2.25
+  deathMenu: {fileID: 0}
+  messageTimeLimit: 1.5
   playerCam: {fileID: 6644281409385775967}
   overheadCamera: {fileID: 0}
   paused: 0
